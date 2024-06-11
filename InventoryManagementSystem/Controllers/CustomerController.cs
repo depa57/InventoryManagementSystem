@@ -26,7 +26,7 @@ namespace InventoryManagementSystem.Controllers
                     using (SqlCommand cmd = new SqlCommand())
                     {
                         cmd.Connection = con;
-                        cmd.CommandText = "select *from Customer_tb";
+                        cmd.CommandText = "select CustomerID,CustomerName,Address,Email,Phone from Customer_tb";
                         cmd.CommandType = System.Data.CommandType.Text;
                         SqlDataReader reader = cmd.ExecuteReader();
 
@@ -36,11 +36,11 @@ namespace InventoryManagementSystem.Controllers
                             {
                                 responseData.Add(new CustomerDetails()
                                 {
-                                    CustomerID = Convert.ToInt32(reader["CustomerID"].ToString()),
-                                    CustomerName = Convert.ToString(reader[" CustomerName"]),//.ToString(),
-                                    Address = reader.GetString(2),
-                                    Email = reader.GetString(3),
-                                    Phone = reader.GetString(4)
+                                    CustomerID = Convert.ToInt32(reader["CustomerID"]),
+                                    CustomerName = reader["CustomerName"].ToString(),
+                                    Address = reader["Address"].ToString(),
+                                    Email = reader["Email"].ToString(),
+                                    Phone = reader["Phone"].ToString()
                                 });
                             }
                         }
@@ -83,7 +83,7 @@ namespace InventoryManagementSystem.Controllers
                     {
                         while (reader.Read())
                         {
-                            responseData.CustomerID = Convert.ToInt32(reader["CustomerID"]);
+                           
                             responseData.CustomerName = reader["CustomerName"].ToString();
                             responseData.Address = reader["Address"].ToString();
                             responseData.Email = (reader["Email"].ToString());

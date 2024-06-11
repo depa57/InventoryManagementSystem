@@ -3,13 +3,13 @@
 @{
     ViewData["Title"] = "Create";
 }
-
-<h1>Create</h1>
-
-<h4>StockModel</h4>
-<hr />
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-8">
+        <div class="d-flex justify-content-center">
+            <h4>Purchase Form</h4>
+        </div>
+        
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             @*<div class="form-group">
@@ -17,31 +17,41 @@
             <input asp-for="StockId" class="form-control" />
             <span asp-validation-for="StockId" class="text-danger"></span>
             </div>*@
-            <div class="form-group">
-                <label asp-for="details.SupplierId" class="control-label"></label>
-                <input asp-for="details.SupplierId" class="form-control" />
-                <span asp-validation-for="details.SupplierId" class="text-danger"></span>
+            <div class="d-flex justify-content-evenly">
+                <div class="form-group" style="width:200px;">
+                    <label asp-for="details.SupplierId" class="control-label"></label>
+                    <br/>
+                    <select asp-for="details.SupplierId" asp-items="Model.SupplierList" class="form-control js-example-basic-single">
+                        <option disabled selected>--Select Suppliers--</option>
+                    </select>
+                    <span asp-validation-for="details.SupplierId" class="text-danger"></span>
+                </div>
+                <div class="form-group" style="width:200px;">
+                    <label asp-for="details.ProductId" class="control-label"></label>
+                    <br/>
+                    <select asp-for="details.ProductId" asp-items="Model.ProductList" class="form-control js-example-basic-single">
+                        <option disabled selected>--Select products--</option>
+                    </select>
+                    <span asp-validation-for="details.ProductId" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="details.ProductId" class="control-label"></label>
-                <select asp-for="details.ProductId" asp-items="Model.ProductList">
-                    <option disabled selected>--Select products--</option>
-                </select>
-                <span asp-validation-for="details.ProductId" class="text-danger"></span>
+            <div class="d-flex justify-content-evenly mt-4">
+                <div class="form-group" style="width:200px;">
+                    <label asp-for="details.Count" class="control-label"></label>
+                    <input asp-for="details.Count" class="form-control" />
+                    <span asp-validation-for="details.Count" class="text-danger"></span>
+                </div>
+                <div class="form-group" style="width:200px;">
+                    <label asp-for="details.TotalCost" class="control-label"></label>
+                    <input asp-for="details.TotalCost" class="form-control" />
+                    <span asp-validation-for="details.TotalCost" class="text-danger"></span>
+                </div>
+                
             </div>
-            
-            <div class="form-group">
-                <label asp-for="details.Count" class="control-label"></label>
-                <input asp-for="details.Count" class="form-control" />
-                <span asp-validation-for="details.Count" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="details.Cost" class="control-label"></label>
-                <input asp-for="details.Cost" class="form-control" />
-                <span asp-validation-for="details.Cost" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="d-flex justify-content-center mt-2">
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
             </div>
         </form>
     </div>
@@ -52,5 +62,15 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        <script>
+            $(document).ready(function () {
+                $('.js-example-basic-single').select2();
+            });
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        
+    }
+
 }

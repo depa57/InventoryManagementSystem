@@ -6,7 +6,7 @@ namespace InventoryManagementSystem.Models.ViewModels
     {
         public StockModel details { get; set; }
 
-       // public IEnumerable<SelectListItem> SupplierList { get; set; }
+        public IEnumerable<SelectListItem> SupplierList { get; set; }
         public IEnumerable<SelectListItem> ProductList { get; set; }
 
 

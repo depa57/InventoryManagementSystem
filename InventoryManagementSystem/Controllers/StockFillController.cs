@@ -44,7 +44,7 @@ namespace InventoryManagementSystem.Controllers
                                     SupplierId = Convert.ToInt32(reader["SupplierId"]),
                                     ProductId = Convert.ToInt32(reader["ProductId"]),
                                     Count = Convert.ToInt32(reader["Count"]),
-                                    Cost = (reader.GetDecimal(reader.GetOrdinal("Cost")))
+                                    TotalCost = (reader.GetDecimal(reader.GetOrdinal("Cost")))
 
                                 });
                             }
@@ -92,7 +92,7 @@ namespace InventoryManagementSystem.Controllers
                             responseData.SupplierId = Convert.ToInt32(reader["SupplierId"]);
                             responseData.ProductId = Convert.ToInt32(reader["ProductId"]);
                             responseData.Count = Convert.ToInt32(reader["Count"]);
-                            responseData.Cost = (reader.GetDecimal(reader.GetOrdinal("Cost")));
+                            responseData.TotalCost = (reader.GetDecimal(reader.GetOrdinal("Cost")));
 
 
 
@@ -140,6 +140,35 @@ namespace InventoryManagementSystem.Controllers
                     reader.Close();
                 }
             }
+            var item = new List<SupplierDetails>();
+
+            // Establish a connection to the database
+            using (SqlConnection con = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
+            {
+                con.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    // SQL query to retrieve data
+                    cmd.Connection = con;
+                    cmd.CommandText = "select SupplierID,SupplierName from supplier_tb";
+                    cmd.CommandType = System.Data.CommandType.Text;
+                    // Execute the query and read the data
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        // Add items to the list
+                        item.Add(new SupplierDetails
+                        {
+
+                            SupplierID = Convert.ToInt32(reader["SupplierID"]),
+                            SupplierName = reader["SupplierName"].ToString()
+                        });
+                    }
+
+                    reader.Close();
+                }
+            }
             StockRelatedComponents stockRelatedcomponents = new StockRelatedComponents()
             {
                 details = new StockModel(),
@@ -150,10 +179,15 @@ namespace InventoryManagementSystem.Controllers
                     Text = u.Prod_Name,
                     Value = u.ProductId.ToString()
                 }
+            ),
+                SupplierList = item.Select
+            (u =>
+                new SelectListItem
+                {
+                    Text = u.SupplierName,
+                    Value = u.SupplierID.ToString()
+                }
             )
-
-               
-
 
             };
             return View(stockRelatedcomponents);
@@ -177,7 +211,7 @@ namespace InventoryManagementSystem.Controllers
                         cmd.Parameters.Add(new SqlParameter("@SupplierId", stockRelatedComponents.details.SupplierId));
                         cmd.Parameters.Add(new SqlParameter("@ProductId", stockRelatedComponents.details.ProductId));
                         cmd.Parameters.Add(new SqlParameter("@Count", stockRelatedComponents.details.Count));
-                        cmd.Parameters.Add(new SqlParameter("@Cost", stockRelatedComponents.details.Cost));
+                        cmd.Parameters.Add(new SqlParameter("@Cost", stockRelatedComponents.details.TotalCost));
                         cmd.CommandType = System.Data.CommandType.StoredProcedure;
                         cmd.ExecuteNonQuery();
 
@@ -223,7 +257,7 @@ namespace InventoryManagementSystem.Controllers
                         cmd.Parameters.Add(new SqlParameter("@SupplierId", data.SupplierId));
                         cmd.Parameters.Add(new SqlParameter("@ProductId", data.ProductId));
                         cmd.Parameters.Add(new SqlParameter("@Count", data.Count));
-                        cmd.Parameters.Add(new SqlParameter("@Cost", data.Cost));
+                        cmd.Parameters.Add(new SqlParameter("@Cost", data.TotalCost));
                         cmd.CommandType = System.Data.CommandType.StoredProcedure;
                         cmd.ExecuteNonQuery();
 
@@ -281,13 +315,7 @@ namespace InventoryManagementSystem.Controllers
 
         }
 
-
-
-        // Action method to render the view with the dropdown
-        public ActionResult DropDownList()
-        {
-            return View();
-        }
+        
     }
 }
 

@@ -8014,19 +8014,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\deepa.gurung\\.nuget\\packages\\": {}
+    "C:\\Users\\HP\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\intern\\Project\\Personal\\IMS\\InventoryManagementSystem\\InventoryManagementSystem.csproj",
+      "projectUniqueName": "D:\\Minor Project\\InventoryManagementSystem\\InventoryManagementSystem\\InventoryManagementSystem.csproj",
       "projectName": "InventoryManagementSystem",
-      "projectPath": "C:\\intern\\Project\\Personal\\IMS\\InventoryManagementSystem\\InventoryManagementSystem.csproj",
-      "packagesPath": "C:\\Users\\deepa.gurung\\.nuget\\packages\\",
-      "outputPath": "C:\\intern\\Project\\Personal\\IMS\\InventoryManagementSystem\\obj\\",
+      "projectPath": "D:\\Minor Project\\InventoryManagementSystem\\InventoryManagementSystem\\InventoryManagementSystem.csproj",
+      "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
+      "outputPath": "D:\\Minor Project\\InventoryManagementSystem\\InventoryManagementSystem\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\deepa.gurung\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

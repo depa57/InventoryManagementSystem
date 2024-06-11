@@ -36,11 +36,11 @@ namespace InventoryManagementSystem.Controllers
                             {
                                 responseData.Add(new SupplierDetails()
                                 {
-                                    SupplierID = reader.GetInt32(0),
-                                    SupplierName = reader.GetString(1),
-                                    Address = reader.GetString(2),
-                                    Email = reader.GetString(3),
-                                    Contact = reader.GetString(4),
+                                    SupplierID = Convert.ToInt32(reader["SupplierID"]),
+                                    SupplierName = Convert.ToString(reader["SupplierName"]),
+                                    Address = reader["Address"].ToString(),
+                                    Email = (reader["Email"].ToString()),
+                                    Contact = (reader["Contact"].ToString())
 
                                 });
 
@@ -81,7 +81,7 @@ namespace InventoryManagementSystem.Controllers
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.Connection = con;
-                    cmd.CommandText = "select SupplierName,Address,Email,Contact from supplier_tb where supplierID=@supplierId";
+                    cmd.CommandText = "select SupplierName,Address,Email,Contact from supplier_tb where SupplierID=@supplierId";
                     cmd.Parameters.Add(new SqlParameter("@supplierId", id));
                     cmd.CommandType = System.Data.CommandType.Text;
                     SqlDataReader reader = cmd.ExecuteReader();
@@ -89,7 +89,7 @@ namespace InventoryManagementSystem.Controllers
                     {
                         while (reader.Read())
                         {
-                            responseData.SupplierID = Convert.ToInt32(reader["SupplierID"]);
+                            
                             responseData.SupplierName = (reader["SupplierName"].ToString());
                             responseData.SupplierName = (reader["Address"].ToString());
                             responseData.Email = (reader["Email"].ToString());

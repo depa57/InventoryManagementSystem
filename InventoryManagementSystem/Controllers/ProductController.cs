@@ -36,7 +36,7 @@ namespace InventoryManagementSystem.Controllers
                                 {
                                     ProductId = Convert.ToInt32(reader["ProductId"]),
                                     Prod_Name = (reader["Prod_Name"].ToString()),
-                                    Prod_Code = Convert.ToInt32(reader["Prod_Code"]),
+                                  
                                     Prod_Quantity = Convert.ToInt32(reader["Prod_Quantity"]),
                                     Prod_Price = (reader.GetDecimal(reader.GetOrdinal("Prod_Price")))
 
@@ -89,7 +89,7 @@ namespace InventoryManagementSystem.Controllers
                         {
                             responseData.ProductId = Convert.ToInt32(reader["ProductId"]);
                             responseData.Prod_Name = (reader["Prod_Name"].ToString()); 
-                            responseData.Prod_Code = Convert.ToInt32(reader["Prod_Code"]); 
+                         
                             responseData.Prod_Quantity = Convert.ToInt32(reader["Prod_Quantity"]);
                             responseData.Prod_Price = (reader.GetDecimal(reader.GetOrdinal("Prod_Price")));
 
@@ -127,7 +127,6 @@ namespace InventoryManagementSystem.Controllers
                         cmd.Connection = con;
                         cmd.CommandText = "sp_Insert_product";
                         cmd.Parameters.Add(new SqlParameter("@Prod_Name", data.Prod_Name));
-                        cmd.Parameters.Add(new SqlParameter("@Prod_Code", data.Prod_Code));
                         cmd.Parameters.Add(new SqlParameter("@Prod_Quantity", data.Prod_Quantity));
                         cmd.Parameters.Add(new SqlParameter("@Prod_Price", data.Prod_Price));
                         cmd.CommandType = System.Data.CommandType.StoredProcedure;
@@ -171,7 +170,7 @@ namespace InventoryManagementSystem.Controllers
 
                         cmd.Parameters.Add(new SqlParameter("@ProductId", data.ProductId));
                         cmd.Parameters.Add(new SqlParameter("@Prod_Name", data.Prod_Name));
-                        cmd.Parameters.Add(new SqlParameter("@Prod_Code", data.Prod_Code));
+                      
                         cmd.Parameters.Add(new SqlParameter("@Prod_Quantity", data.Prod_Quantity));
                         cmd.Parameters.Add(new SqlParameter("@Prod_Price", data.Prod_Price));
                         cmd.CommandType = System.Data.CommandType.StoredProcedure;
