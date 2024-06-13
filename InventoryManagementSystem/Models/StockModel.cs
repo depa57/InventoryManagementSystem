@@ -14,6 +14,6 @@ namespace InventoryManagementSystem.Models
         public int Count{ get; set; }
        
         public decimal TotalCost { get; set; }
-        public DateTime DateTime { get; set; }
+        public DateTime Date { get; set; }
     }
 }

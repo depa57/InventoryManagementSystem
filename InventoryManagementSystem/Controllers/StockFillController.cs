@@ -33,7 +33,7 @@ namespace InventoryManagementSystem.Controllers
                     using (SqlCommand cmd = new SqlCommand())
                     {
                         cmd.Connection = con;
-                        cmd.CommandText = "select StockId,SupplierID,ProductId,Count,Cost,DateTime from Stock_tb";
+                        cmd.CommandText = "select StockId,SupplierID,ProductId,Count,Cost,Date from Stock_tb";
                         cmd.CommandType = System.Data.CommandType.Text;
                         SqlDataReader reader = cmd.ExecuteReader();
 
@@ -48,7 +48,7 @@ namespace InventoryManagementSystem.Controllers
                                     ProductId = Convert.ToInt32(reader["ProductId"]),
                                     Count = Convert.ToInt32(reader["Count"]),
                                     TotalCost = (reader.GetDecimal(reader.GetOrdinal("Cost"))),
-                                    DateTime = Convert.ToDateTime(reader["DateTime"].ToString())
+                                    Date = Convert.ToDateTime(reader["Date"].ToString())
                                 });
                             }
                         }
@@ -96,7 +96,7 @@ namespace InventoryManagementSystem.Controllers
                             responseData.ProductId = Convert.ToInt32(reader["ProductId"]);
                             responseData.Count = Convert.ToInt32(reader["Count"]);
                             responseData.TotalCost = (reader.GetDecimal(reader.GetOrdinal("Cost")));
-                            responseData.DateTime = Convert.ToDateTime(reader["DateTime"].ToString());
+                            responseData.Date = Convert.ToDateTime(reader["Date"].ToString());
 
 
 
@@ -216,7 +216,7 @@ namespace InventoryManagementSystem.Controllers
                         cmd.Parameters.Add(new SqlParameter("@ProductId", stockRelatedComponents.details.ProductId));
                         cmd.Parameters.Add(new SqlParameter("@Count", stockRelatedComponents.details.Count));
                         cmd.Parameters.Add(new SqlParameter("@Cost", stockRelatedComponents.details.TotalCost));
-                        cmd.Parameters.Add(new SqlParameter("@DateTime", stockRelatedComponents.details.DateTime));
+                        cmd.Parameters.Add(new SqlParameter("@Date", stockRelatedComponents.details.Date));
 
                         cmd.CommandType = System.Data.CommandType.StoredProcedure;
                         cmd.ExecuteNonQuery();
@@ -264,7 +264,7 @@ namespace InventoryManagementSystem.Controllers
                         cmd.Parameters.Add(new SqlParameter("@ProductId", data.ProductId));
                         cmd.Parameters.Add(new SqlParameter("@Count", data.Count));
                         cmd.Parameters.Add(new SqlParameter("@Cost", data.TotalCost));
-                        cmd.Parameters.Add(new SqlParameter("@DateTime", data.DateTime));
+                        cmd.Parameters.Add(new SqlParameter("@Date", data.Date));
                         cmd.CommandType = System.Data.CommandType.StoredProcedure;
                         cmd.ExecuteNonQuery();
 
