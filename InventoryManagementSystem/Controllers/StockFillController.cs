@@ -1,5 +1,6 @@
 ﻿using InventoryManagementSystem.Models;
 using InventoryManagementSystem.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -7,9 +8,11 @@ using Microsoft.CodeAnalysis;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Hosting;
 using System.Linq;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace InventoryManagementSystem.Controllers
 {
+    [Authorize]
     public class StockFillController : Controller
     {
         private readonly IConfiguration _configuration;
@@ -30,7 +33,7 @@ namespace InventoryManagementSystem.Controllers
                     using (SqlCommand cmd = new SqlCommand())
                     {
                         cmd.Connection = con;
-                        cmd.CommandText = "select *from Stock_tb";
+                        cmd.CommandText = "select StockId,SupplierID,ProductId,Count,Cost,DateTime from Stock_tb";
                         cmd.CommandType = System.Data.CommandType.Text;
                         SqlDataReader reader = cmd.ExecuteReader();
 
@@ -44,8 +47,8 @@ namespace InventoryManagementSystem.Controllers
                                     SupplierId = Convert.ToInt32(reader["SupplierId"]),
                                     ProductId = Convert.ToInt32(reader["ProductId"]),
                                     Count = Convert.ToInt32(reader["Count"]),
-                                    TotalCost = (reader.GetDecimal(reader.GetOrdinal("Cost")))
-
+                                    TotalCost = (reader.GetDecimal(reader.GetOrdinal("Cost"))),
+                                    DateTime = Convert.ToDateTime(reader["DateTime"].ToString())
                                 });
                             }
                         }
@@ -79,7 +82,7 @@ namespace InventoryManagementSystem.Controllers
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.Connection = con;
-                    cmd.CommandText = "select *from Stock_tb where StockId=@StockId";
+                    cmd.CommandText = "select StockId,SupplierId,ProductId,Count,Cost,Date from Stock_tb where StockId=@StockId";
                     cmd.Parameters.Add(new SqlParameter("@StockId", id));
 
                     cmd.CommandType = System.Data.CommandType.Text;
@@ -93,6 +96,7 @@ namespace InventoryManagementSystem.Controllers
                             responseData.ProductId = Convert.ToInt32(reader["ProductId"]);
                             responseData.Count = Convert.ToInt32(reader["Count"]);
                             responseData.TotalCost = (reader.GetDecimal(reader.GetOrdinal("Cost")));
+                            responseData.DateTime = Convert.ToDateTime(reader["DateTime"].ToString());
 
 
 
@@ -212,6 +216,8 @@ namespace InventoryManagementSystem.Controllers
                         cmd.Parameters.Add(new SqlParameter("@ProductId", stockRelatedComponents.details.ProductId));
                         cmd.Parameters.Add(new SqlParameter("@Count", stockRelatedComponents.details.Count));
                         cmd.Parameters.Add(new SqlParameter("@Cost", stockRelatedComponents.details.TotalCost));
+                        cmd.Parameters.Add(new SqlParameter("@DateTime", stockRelatedComponents.details.DateTime));
+
                         cmd.CommandType = System.Data.CommandType.StoredProcedure;
                         cmd.ExecuteNonQuery();
 
@@ -258,6 +264,7 @@ namespace InventoryManagementSystem.Controllers
                         cmd.Parameters.Add(new SqlParameter("@ProductId", data.ProductId));
                         cmd.Parameters.Add(new SqlParameter("@Count", data.Count));
                         cmd.Parameters.Add(new SqlParameter("@Cost", data.TotalCost));
+                        cmd.Parameters.Add(new SqlParameter("@DateTime", data.DateTime));
                         cmd.CommandType = System.Data.CommandType.StoredProcedure;
                         cmd.ExecuteNonQuery();
 

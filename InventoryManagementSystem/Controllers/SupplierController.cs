@@ -1,4 +1,5 @@
 ﻿using InventoryManagementSystem.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
@@ -8,6 +9,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace InventoryManagementSystem.Controllers
 {
+    [Authorize]
     public class SupplierController : Controller
     {  
         private readonly IConfiguration _configuration;
@@ -16,6 +18,7 @@ namespace InventoryManagementSystem.Controllers
                 _configuration = configuration;
         }
         // GET: SupplierController
+        //[Authorize]
         public ActionResult SupplierList()
         {
             try
@@ -37,7 +40,7 @@ namespace InventoryManagementSystem.Controllers
                                 responseData.Add(new SupplierDetails()
                                 {
                                     SupplierID = Convert.ToInt32(reader["SupplierID"]),
-                                    SupplierName = Convert.ToString(reader["SupplierName"]),
+                                    SupplierName = reader["SupplierName"].ToString(),
                                     Address = reader["Address"].ToString(),
                                     Email = (reader["Email"].ToString()),
                                     Contact = (reader["Contact"].ToString())
@@ -81,7 +84,7 @@ namespace InventoryManagementSystem.Controllers
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.Connection = con;
-                    cmd.CommandText = "select SupplierName,Address,Email,Contact from supplier_tb where SupplierID=@supplierId";
+                    cmd.CommandText = "select SupplierID,SupplierName,Address,Email,Contact from supplier_tb where SupplierID=@supplierId";
                     cmd.Parameters.Add(new SqlParameter("@supplierId", id));
                     cmd.CommandType = System.Data.CommandType.Text;
                     SqlDataReader reader = cmd.ExecuteReader();
@@ -89,9 +92,9 @@ namespace InventoryManagementSystem.Controllers
                     {
                         while (reader.Read())
                         {
-                            
+                            responseData.SupplierID = Convert.ToInt32(reader["SupplierID"]);
                             responseData.SupplierName = (reader["SupplierName"].ToString());
-                            responseData.SupplierName = (reader["Address"].ToString());
+                            responseData.Address = (reader["Address"].ToString());
                             responseData.Email = (reader["Email"].ToString());
                             responseData.Contact = (reader["Contact"].ToString());
 

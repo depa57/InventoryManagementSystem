@@ -1,1 +1,1 @@
-select *from stock_tb
+select *from Stock_tb

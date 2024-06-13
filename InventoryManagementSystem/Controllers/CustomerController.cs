@@ -1,4 +1,5 @@
 ﻿using InventoryManagementSystem.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
@@ -6,6 +7,7 @@ using System.Net;
 
 namespace InventoryManagementSystem.Controllers
 {
+    [Authorize]
     public class CustomerController : Controller
     {
         private readonly IConfiguration _configuration;
@@ -74,7 +76,7 @@ namespace InventoryManagementSystem.Controllers
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.Connection = con;
-                    cmd.CommandText = "select CustomerName,Address,Email,Phone from Customer_tb where CustomerID=@customerId";
+                    cmd.CommandText = "select CustomerID,CustomerName,Address,Email,Phone from Customer_tb where CustomerID=@customerId";
                     cmd.Parameters.Add(new SqlParameter("@customerId", id));
 
                     cmd.CommandType = System.Data.CommandType.Text;
@@ -83,7 +85,7 @@ namespace InventoryManagementSystem.Controllers
                     {
                         while (reader.Read())
                         {
-                           
+                            responseData.CustomerID = Convert.ToInt32(reader["CustomerID"]);
                             responseData.CustomerName = reader["CustomerName"].ToString();
                             responseData.Address = reader["Address"].ToString();
                             responseData.Email = (reader["Email"].ToString());

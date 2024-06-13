@@ -5,6 +5,42 @@
       "PackagePath": "staticwebassets\\InventoryManagementSystem.bundle.scp.css"
     },
     {
+      "Id": "D:\\Minor Project\\InventoryManagementSystem\\InventoryManagementSystem\\wwwroot\\Images\\inventory.jpeg",
+      "PackagePath": "staticwebassets\\Images\\inventory.jpeg"
+    },
+    {
+      "Id": "D:\\Minor Project\\InventoryManagementSystem\\InventoryManagementSystem\\wwwroot\\Images\\inventory3.jpg",
+      "PackagePath": "staticwebassets\\Images\\inventory3.jpg"
+    },
+    {
+      "Id": "D:\\Minor Project\\InventoryManagementSystem\\InventoryManagementSystem\\wwwroot\\Images\\inventory7.jpeg",
+      "PackagePath": "staticwebassets\\Images\\inventory7.jpeg"
+    },
+    {
+      "Id": "D:\\Minor Project\\InventoryManagementSystem\\InventoryManagementSystem\\wwwroot\\Images\\login.png",
+      "PackagePath": "staticwebassets\\Images\\login.png"
+    },
+    {
+      "Id": "D:\\Minor Project\\InventoryManagementSystem\\InventoryManagementSystem\\wwwroot\\css\\IMS\\bootstrap-datetimepicker.min.css",
+      "PackagePath": "staticwebassets\\css\\IMS\\bootstrap-datetimepicker.min.css"
+    },
+    {
+      "Id": "D:\\Minor Project\\InventoryManagementSystem\\InventoryManagementSystem\\wwwroot\\css\\IMS\\ckeditor.css",
+      "PackagePath": "staticwebassets\\css\\IMS\\ckeditor.css"
+    },
+    {
+      "Id": "D:\\Minor Project\\InventoryManagementSystem\\InventoryManagementSystem\\wwwroot\\css\\IMS\\feather.css",
+      "PackagePath": "staticwebassets\\css\\IMS\\feather.css"
+    },
+    {
+      "Id": "D:\\Minor Project\\InventoryManagementSystem\\InventoryManagementSystem\\wwwroot\\css\\IMS\\style.css",
+      "PackagePath": "staticwebassets\\css\\IMS\\style.css"
+    },
+    {
+      "Id": "D:\\Minor Project\\InventoryManagementSystem\\InventoryManagementSystem\\wwwroot\\css\\login.css",
+      "PackagePath": "staticwebassets\\css\\login.css"
+    },
+    {
       "Id": "D:\\Minor Project\\InventoryManagementSystem\\InventoryManagementSystem\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
