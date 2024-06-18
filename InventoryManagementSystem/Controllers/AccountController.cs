@@ -7,7 +7,7 @@ using InventoryManagementSystem.ViewModels;
 
 namespace InventoryManagementSystem.Controllers
 {
-    [Authorize]
+    
     public class AccountController : Controller
     {
         private readonly UserManager<IdentityUser> _userManager;

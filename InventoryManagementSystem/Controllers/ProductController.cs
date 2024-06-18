@@ -38,7 +38,6 @@ namespace InventoryManagementSystem.Controllers
                                 {
                                     ProductId = Convert.ToInt32(reader["ProductId"]),
                                     Prod_Name = (reader["Prod_Name"].ToString()),
-                                  
                                     Prod_Quantity = Convert.ToInt32(reader["Prod_Quantity"]),
                                     Prod_Price = (reader.GetDecimal(reader.GetOrdinal("Prod_Price")))
 
@@ -81,7 +80,7 @@ namespace InventoryManagementSystem.Controllers
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.Connection = con;
-                    cmd.CommandText = "select *from Product_tb where ProductId=@ProductId";
+                    cmd.CommandText = "select ProductId,Prod_Name,Prod_Quantity,Prod_Price from Product_tb where ProductId=@ProductId";
                     cmd.Parameters.Add(new SqlParameter("@ProductId", id));
                     cmd.CommandType = System.Data.CommandType.Text;
                     SqlDataReader reader = cmd.ExecuteReader();
@@ -91,7 +90,6 @@ namespace InventoryManagementSystem.Controllers
                         {
                             responseData.ProductId = Convert.ToInt32(reader["ProductId"]);
                             responseData.Prod_Name = (reader["Prod_Name"].ToString()); 
-                         
                             responseData.Prod_Quantity = Convert.ToInt32(reader["Prod_Quantity"]);
                             responseData.Prod_Price = (reader.GetDecimal(reader.GetOrdinal("Prod_Price")));
 
@@ -172,9 +170,8 @@ namespace InventoryManagementSystem.Controllers
 
                         cmd.Parameters.Add(new SqlParameter("@ProductId", data.ProductId));
                         cmd.Parameters.Add(new SqlParameter("@Prod_Name", data.Prod_Name));
-                      
-                        cmd.Parameters.Add(new SqlParameter("@Prod_Quantity", data.Prod_Quantity));
-                        cmd.Parameters.Add(new SqlParameter("@Prod_Price", data.Prod_Price));
+                       // cmd.Parameters.Add(new SqlParameter("@Prod_Quantity", data.Prod_Quantity));
+                        //cmd.Parameters.Add(new SqlParameter("@Prod_Price", data.Prod_Price));
                         cmd.CommandType = System.Data.CommandType.StoredProcedure;
                         cmd.ExecuteNonQuery();
 
