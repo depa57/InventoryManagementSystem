@@ -3,20 +3,36 @@
   "WorkspaceRootPath": "C:\\intern\\InventoryManagementSystem\\InventoryManagementSystem\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{585308C7-9DD8-43FE-8C32-D911E4CD421D}|InventoryManagementSystem.csproj|c:\\intern\\inventorymanagementsystem\\inventorymanagementsystem\\controllers\\reportcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{585308C7-9DD8-43FE-8C32-D911E4CD421D}|InventoryManagementSystem.csproj|solutionrelative:controllers\\reportcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{585308C7-9DD8-43FE-8C32-D911E4CD421D}|InventoryManagementSystem.csproj|c:\\intern\\inventorymanagementsystem\\inventorymanagementsystem\\views\\report\\purchasereportlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{585308C7-9DD8-43FE-8C32-D911E4CD421D}|InventoryManagementSystem.csproj|solutionrelative:views\\report\\purchasereportlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{585308C7-9DD8-43FE-8C32-D911E4CD421D}|InventoryManagementSystem.csproj|c:\\intern\\inventorymanagementsystem\\inventorymanagementsystem\\controllers\\stockfillcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{585308C7-9DD8-43FE-8C32-D911E4CD421D}|InventoryManagementSystem.csproj|solutionrelative:controllers\\stockfillcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{585308C7-9DD8-43FE-8C32-D911E4CD421D}|InventoryManagementSystem.csproj|c:\\intern\\inventorymanagementsystem\\inventorymanagementsystem\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{585308C7-9DD8-43FE-8C32-D911E4CD421D}|InventoryManagementSystem.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{585308C7-9DD8-43FE-8C32-D911E4CD421D}|InventoryManagementSystem.csproj|c:\\intern\\inventorymanagementsystem\\inventorymanagementsystem\\models\\purchasereportmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{585308C7-9DD8-43FE-8C32-D911E4CD421D}|InventoryManagementSystem.csproj|solutionrelative:models\\purchasereportmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{585308C7-9DD8-43FE-8C32-D911E4CD421D}|InventoryManagementSystem.csproj|c:\\intern\\inventorymanagementsystem\\inventorymanagementsystem\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{585308C7-9DD8-43FE-8C32-D911E4CD421D}|InventoryManagementSystem.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{585308C7-9DD8-43FE-8C32-D911E4CD421D}|InventoryManagementSystem.csproj|c:\\intern\\inventorymanagementsystem\\inventorymanagementsystem\\models\\viewmodels\\purchaserepodropdown.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{585308C7-9DD8-43FE-8C32-D911E4CD421D}|InventoryManagementSystem.csproj|solutionrelative:models\\viewmodels\\purchaserepodropdown.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{585308C7-9DD8-43FE-8C32-D911E4CD421D}|InventoryManagementSystem.csproj|c:\\intern\\inventorymanagementsystem\\inventorymanagementsystem\\controllers\\suppliercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{585308C7-9DD8-43FE-8C32-D911E4CD421D}|InventoryManagementSystem.csproj|solutionrelative:controllers\\suppliercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{585308C7-9DD8-43FE-8C32-D911E4CD421D}|InventoryManagementSystem.csproj|c:\\intern\\inventorymanagementsystem\\inventorymanagementsystem\\views\\report\\purchasereport.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{585308C7-9DD8-43FE-8C32-D911E4CD421D}|InventoryManagementSystem.csproj|solutionrelative:views\\report\\purchasereport.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{585308C7-9DD8-43FE-8C32-D911E4CD421D}|InventoryManagementSystem.csproj|c:\\intern\\inventorymanagementsystem\\inventorymanagementsystem\\views\\stockfill\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{585308C7-9DD8-43FE-8C32-D911E4CD421D}|InventoryManagementSystem.csproj|solutionrelative:views\\stockfill\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{585308C7-9DD8-43FE-8C32-D911E4CD421D}|InventoryManagementSystem.csproj|c:\\intern\\inventorymanagementsystem\\inventorymanagementsystem\\models\\supplierdetails.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{585308C7-9DD8-43FE-8C32-D911E4CD421D}|InventoryManagementSystem.csproj|solutionrelative:models\\supplierdetails.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,7 +42,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 10,
+          "SelectedChildIndex": 11,
           "Children": [
             {
               "$type": "Bookmark",
@@ -59,54 +75,99 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\intern\\InventoryManagementSystem\\InventoryManagementSystem\\appsettings.json",
-              "RelativeDocumentMoniker": "appsettings.json",
-              "ToolTip": "C:\\intern\\InventoryManagementSystem\\InventoryManagementSystem\\appsettings.json",
-              "RelativeToolTip": "appsettings.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAtAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-06-18T05:08:14.325Z",
+              "Title": "PurchaseReportList.cshtml",
+              "DocumentMoniker": "C:\\intern\\InventoryManagementSystem\\InventoryManagementSystem\\Views\\Report\\PurchaseReportList.cshtml",
+              "RelativeDocumentMoniker": "Views\\Report\\PurchaseReportList.cshtml",
+              "ToolTip": "C:\\intern\\InventoryManagementSystem\\InventoryManagementSystem\\Views\\Report\\PurchaseReportList.cshtml",
+              "RelativeToolTip": "Views\\Report\\PurchaseReportList.cshtml",
+              "ViewState": "AQIAABgAAAAAAAAAAAAAAB0AAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-07-03T11:28:20.52Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\intern\\InventoryManagementSystem\\InventoryManagementSystem\\Views\\StockFill\\Create.cshtml",
+              "RelativeDocumentMoniker": "Views\\StockFill\\Create.cshtml",
+              "ToolTip": "C:\\intern\\InventoryManagementSystem\\InventoryManagementSystem\\Views\\StockFill\\Create.cshtml",
+              "RelativeToolTip": "Views\\StockFill\\Create.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAABJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-07-03T11:05:34.898Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "PurchaseReport.cshtml",
+              "DocumentMoniker": "C:\\intern\\InventoryManagementSystem\\InventoryManagementSystem\\Views\\Report\\PurchaseReport.cshtml",
+              "RelativeDocumentMoniker": "Views\\Report\\PurchaseReport.cshtml",
+              "ToolTip": "C:\\intern\\InventoryManagementSystem\\InventoryManagementSystem\\Views\\Report\\PurchaseReport.cshtml",
+              "RelativeToolTip": "Views\\Report\\PurchaseReport.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAA7AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-07-03T09:59:20.57Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "PurchaseReportModel.cs",
+              "DocumentMoniker": "C:\\intern\\InventoryManagementSystem\\InventoryManagementSystem\\Models\\PurchaseReportModel.cs",
+              "RelativeDocumentMoniker": "Models\\PurchaseReportModel.cs",
+              "ToolTip": "C:\\intern\\InventoryManagementSystem\\InventoryManagementSystem\\Models\\PurchaseReportModel.cs",
+              "RelativeToolTip": "Models\\PurchaseReportModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwAUAAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-03T10:05:16.433Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ReportController.cs",
+              "DocumentMoniker": "C:\\intern\\InventoryManagementSystem\\InventoryManagementSystem\\Controllers\\ReportController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ReportController.cs",
+              "ToolTip": "C:\\intern\\InventoryManagementSystem\\InventoryManagementSystem\\Controllers\\ReportController.cs",
+              "RelativeToolTip": "Controllers\\ReportController.cs",
+              "ViewState": "AQIAAGUAAAAAAAAAAAAqwHsAAAAkAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-02T10:25:11.992Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\intern\\InventoryManagementSystem\\InventoryManagementSystem\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\intern\\InventoryManagementSystem\\InventoryManagementSystem\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-18T05:08:08.952Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "SupplierController.cs",
-              "DocumentMoniker": "C:\\intern\\InventoryManagementSystem\\InventoryManagementSystem\\Controllers\\SupplierController.cs",
-              "RelativeDocumentMoniker": "Controllers\\SupplierController.cs",
-              "ToolTip": "C:\\intern\\InventoryManagementSystem\\InventoryManagementSystem\\Controllers\\SupplierController.cs",
-              "RelativeToolTip": "Controllers\\SupplierController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-15T05:46:49.908Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
               "Title": "StockFillController.cs",
               "DocumentMoniker": "C:\\intern\\InventoryManagementSystem\\InventoryManagementSystem\\Controllers\\StockFillController.cs",
               "RelativeDocumentMoniker": "Controllers\\StockFillController.cs",
               "ToolTip": "C:\\intern\\InventoryManagementSystem\\InventoryManagementSystem\\Controllers\\StockFillController.cs",
               "RelativeToolTip": "Controllers\\StockFillController.cs",
-              "ViewState": "AQIAABAAAAAAAAAAAAAYwCUAAAAYAAAA",
+              "ViewState": "AQIAAMEAAAAAAAAAAAAcwMoAAAAwAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-12T16:01:34.144Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-03T10:08:03.801Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "PurchaseRepoDropDown.cs",
+              "DocumentMoniker": "C:\\intern\\InventoryManagementSystem\\InventoryManagementSystem\\Models\\ViewModels\\PurchaseRepoDropDown.cs",
+              "RelativeDocumentMoniker": "Models\\ViewModels\\PurchaseRepoDropDown.cs",
+              "ToolTip": "C:\\intern\\InventoryManagementSystem\\InventoryManagementSystem\\Models\\ViewModels\\PurchaseRepoDropDown.cs",
+              "RelativeToolTip": "Models\\ViewModels\\PurchaseRepoDropDown.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwAYAAAAbAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-02T11:05:36.787Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "SupplierDetails.cs",
+              "DocumentMoniker": "C:\\intern\\InventoryManagementSystem\\InventoryManagementSystem\\Models\\SupplierDetails.cs",
+              "RelativeDocumentMoniker": "Models\\SupplierDetails.cs",
+              "ToolTip": "C:\\intern\\InventoryManagementSystem\\InventoryManagementSystem\\Models\\SupplierDetails.cs",
+              "RelativeToolTip": "Models\\SupplierDetails.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwAgAAAAYAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-02T11:13:48.988Z"
             }
           ]
         }
