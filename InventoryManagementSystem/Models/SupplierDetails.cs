@@ -6,7 +6,7 @@ namespace InventoryManagementSystem.Models
     {
         public int SupplierID { get; set; }
 
-        [StringLength(20, ErrorMessage = "The field must be a string with a maximum length of 20.")]
+        [StringLength(100, ErrorMessage = "The field must be a string with a maximum length of 20.")]
         [Required(ErrorMessage = "SupplierName field is required.")]
         [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Supplier name can only contain letters.")]
         public string SupplierName { get; set; }

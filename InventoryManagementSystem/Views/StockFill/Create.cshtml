@@ -92,7 +92,7 @@
         
         <div class="form-group">
             <label asp-for="details.Date" class="control-label"></label>
-            <input asp-for="details.Date" class="form-control" />
+            <input asp-for="details.Date" class="form-control" type="date" min="1900-01-01" max="2024-12-31"/>
             <span asp-validation-for="details.Date" class="text-danger"></span>
         </div>
         

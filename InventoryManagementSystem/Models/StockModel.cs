@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace InventoryManagementSystem.Models
 {
@@ -10,10 +11,8 @@ namespace InventoryManagementSystem.Models
         public int SupplierId{ get; set; }
         [DisplayName("Product")]
         public int ProductId { get; set; }
-       
         public int Count{ get; set; }
-       
         public decimal TotalCost { get; set; }
-        public DateTime Date { get; set; }
+        public DateTime Date { get; set; } = DateTime.Now;
     }
 }

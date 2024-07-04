@@ -1,0 +1,64 @@
+﻿@model InventoryManagementSystem.Models.ViewModels.PurchaseRepoDropDown
+
+@{
+    ViewData["Title"] = "PurchaseReport";
+}
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<h1>Purchase Report By Supplier</h1>
+
+@*<h4>PurchaseReportModel</h4>*@
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="PurchaseReport">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @*<div class="form-group">
+            <label asp-for="PurchaseId" class="control-label"></label>
+            <input asp-for="PurchaseId" class="form-control" />
+            <span asp-validation-for="PurchaseId" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="details.From" class="control-label"></label>
+                <input asp-for="details.From" class="form-control" type="date" min="1900-01-01" max="2024-12-31" />
+                <span asp-validation-for="details.From" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="details.To" class="control-label"></label>
+                <input asp-for="details.To" class="form-control" type="date" min="1900-01-01" max="2024-12-31" />
+                <span asp-validation-for="details.To" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="details.SupplierId" class="control-label"></label>
+                <select asp-for="details.SupplierId" asp-items="Model.SupplierList" class="form-control js-example-basic-single">
+                    <option disabled selected>--Select Supplier--</option>
+                </select>
+                <span asp-validation-for="details.SupplierId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@* @section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+} *@
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            debugger;
+            $('.js-example-basic-single').select2();
+        });
+    </script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
