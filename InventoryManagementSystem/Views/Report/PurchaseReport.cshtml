@@ -1,7 +1,7 @@
 ﻿@model InventoryManagementSystem.Models.ViewModels.PurchaseRepoDropDown
 
 @{
-    ViewData["Title"] = "PurchaseReport";
+    //ViewData["Title"] = "PurchaseReport";
 }
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <h1>Purchase Report By Supplier</h1>
@@ -41,10 +41,10 @@
     </div>
 </div>
 
-<div>
+@* <div>
     <a asp-action="Index">Back to List</a>
 </div>
-
+ *@
 @* @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");

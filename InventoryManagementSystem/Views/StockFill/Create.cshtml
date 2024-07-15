@@ -64,7 +64,7 @@
         
         <div class="form-group">
             <label asp-for="details.SupplierId" class="control-label"></label>
-            <select asp-for="details.SupplierId" asp-items="Model.SupplierList" class="form-control js-example-basic-single">
+            <select asp-for="details.SupplierId" id="supplier" asp-items="Model.SupplierList" class="form-control js-example-basic-single">
                 <option disabled selected>--Select Supplier--</option>
             </select>
             <span asp-validation-for="details.SupplierId" class="text-danger"></span>
@@ -72,7 +72,7 @@
         
         <div class="form-group">
             <label asp-for="details.ProductId" class="control-label"></label>
-            <select asp-for="details.ProductId" asp-items="Model.ProductList" class="form-control js-example-basic-single">
+            <select asp-for="details.ProductId" id="products" asp-items="Model.ProductList" class="form-control js-example-basic-single">
                 <option disabled selected>--Select Product--</option>
             </select>
             <span asp-validation-for="details.ProductId" class="text-danger"></span>
@@ -110,6 +110,34 @@
         $(document).ready(function () {
             $('.js-example-basic-single').select2();
         });
+        $('#supplier').change(function () {
+            var id = $(this).val();    
+            
+            $.ajax({
+                type: "GET",
+                url: "/stockFill/GetProductBySupplierID",
+                data: { 'supplierId': id }
+
+            }).done(function (data) {
+
+                
+                // Clear the existing options in the dropdown
+                $('#products').empty();
+                $('#products').append('<option disabled selected>--Select Product--</option>');
+               
+                // Add the new options
+                $.each(data, function (index, product) {                  
+
+                    $('#products').append($('<option>', {
+                        value: product.productId,
+                        text: product.prod_Name
+                    }));
+                });
+
+
+            });
+        });
+      
     </script>
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");

@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<InventoryManagementSystem.Models.StockModel>
 
 @{
-    ViewData["Title"] = "StockList";
+    ViewData["Title"] = "Purchase List";
 }
 
 @*<h1>StockList</h1>
@@ -100,7 +100,7 @@
                         <div class="page-header">
                             <div class="row align-items-center">
                                 <div class="col" id="TableHeader">
-                                    <h3 class="page-title">StockList</h3>
+                                    <h3 class="page-title">Purchase List</h3>
                                     <a asp-action="Create" class="btn btn-primary" id="createStockList">Create</a>
                                 </div>
                             </div>
@@ -111,13 +111,13 @@
                                 <thead class="student-thread">
                                     <tr>
                                         <th>
-                                            @Html.DisplayNameFor(model => model.StockId)
+                                            @Html.DisplayNameFor(model => model.PurchaseId)
                                         </th>
                                         <th>
-                                            @Html.DisplayNameFor(model => model.SupplierId)
+                                            @Html.DisplayNameFor(model => model.SupplierName)
                                         </th>
                                         <th>
-                                            @Html.DisplayNameFor(model => model.ProductId)
+                                            @Html.DisplayNameFor(model => model.ProductName)
                                         </th>
                                         <th>
                                             @Html.DisplayNameFor(model => model.Count)
@@ -136,13 +136,13 @@
                                     {
                                         <tr>
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.StockId)
+                                                @Html.DisplayFor(modelItem => item.PurchaseId)
                                             </td>
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.SupplierId)
+                                                @Html.DisplayFor(modelItem => item.SupplierName)
                                             </td>
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.ProductId)
+                                                @Html.DisplayFor(modelItem => item.ProductName)
                                             </td>
                                             <td>
                                                 @Html.DisplayFor(modelItem => item.Count)
@@ -154,9 +154,8 @@
                                                 @Html.DisplayFor(modelItem => item.Date)
                                             </td>
                                             <td>
-                                                @Html.ActionLink("Edit", "Edit", new { id = item.StockId }) |
-                                                @Html.ActionLink("Details", "Details", new { id = item.StockId }) |
-                                                @Html.ActionLink("Delete", "Delete", new { id = item.StockId })
+                                                @Html.ActionLink("Edit", "Edit", new { id = item.PurchaseId }) |
+                                                @Html.ActionLink("Details", "Details", new { id = item.PurchaseId }) |
                                             </td>
                                         </tr>
                                     }

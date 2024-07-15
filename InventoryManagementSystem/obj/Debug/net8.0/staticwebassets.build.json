@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ZHeT9elnQhL5bUWQnqqQQfU+aaM7p/mA9KPJP17Hpiw=",
+  "Hash": "l98HjLtnvZjAbv1Mrk2ekyjSjKPWqq/qlPN6OQ+4YZ4=",
   "Source": "InventoryManagementSystem",
   "BasePath": "_content/InventoryManagementSystem",
   "Mode": "Default",
@@ -167,6 +167,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
+    },
+    {
+      "Identity": "D:\\Minor Project\\InventoryManagementSystem\\InventoryManagementSystem\\wwwroot\\css\\styles.css",
+      "SourceId": "InventoryManagementSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Minor Project\\InventoryManagementSystem\\InventoryManagementSystem\\wwwroot\\",
+      "BasePath": "_content/InventoryManagementSystem",
+      "RelativePath": "css/styles.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\styles.css"
     },
     {
       "Identity": "D:\\Minor Project\\InventoryManagementSystem\\InventoryManagementSystem\\wwwroot\\favicon.ico",

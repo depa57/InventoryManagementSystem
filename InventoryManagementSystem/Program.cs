@@ -6,7 +6,7 @@ using InventoryManagementSystem.Context;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews();// reperesents involment of both controller and view
 
 string connectionString = builder.Configuration.GetConnectionString("DefaultConnection")!;
 builder.Services.AddDbContext<SimpleWebAppDBContext>(c => c.UseSqlServer(connectionString));
@@ -23,8 +23,8 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
-app.UseStaticFiles();
+app.UseHttpsRedirection();// convert http to https
+app.UseStaticFiles();//represents existance of wwwroot folder
 app.UseRouting();
 
 app.MapControllerRoute(

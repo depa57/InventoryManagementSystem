@@ -1,5 +1,6 @@
 ﻿using InventoryManagementSystem.Models;
 using InventoryManagementSystem.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -8,6 +9,7 @@ using Newtonsoft.Json;
 
 namespace InventoryManagementSystem.Controllers
 {
+    [Authorize]
     public class ReportController : Controller
     {
         private readonly IConfiguration _configuration;

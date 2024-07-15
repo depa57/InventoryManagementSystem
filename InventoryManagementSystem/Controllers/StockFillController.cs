@@ -33,8 +33,8 @@ namespace InventoryManagementSystem.Controllers
                     using (SqlCommand cmd = new SqlCommand())
                     {
                         cmd.Connection = con;
-                        cmd.CommandText = "select StockId,SupplierID,ProductId,Count,Cost,Date from Stock_tb";
-                        cmd.CommandType = System.Data.CommandType.Text;
+                        cmd.CommandText = "Purchase_List";
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
                         SqlDataReader reader = cmd.ExecuteReader();
 
                         if (reader.HasRows)
@@ -43,11 +43,11 @@ namespace InventoryManagementSystem.Controllers
                             {
                                 responseData.Add(new StockModel()
                                 {
-                                    StockId = Convert.ToInt32(reader["StockId"]),
-                                    SupplierId = Convert.ToInt32(reader["SupplierId"]),
-                                    ProductId = Convert.ToInt32(reader["ProductId"]),
+                                    PurchaseId = Convert.ToInt32(reader["Purchase_Id"]),
+                                    SupplierName = reader["SupplierName"].ToString(),
+                                    ProductName = reader["Prod_Name"].ToString(),
                                     Count = Convert.ToInt32(reader["Count"]),
-                                    TotalCost = (reader.GetDecimal(reader.GetOrdinal("Cost"))),
+                                    TotalCost = (reader.GetDecimal(reader.GetOrdinal("per_Product_Cost"))),
                                     Date = Convert.ToDateTime(reader["Date"].ToString())
                                 });
                             }
@@ -82,8 +82,8 @@ namespace InventoryManagementSystem.Controllers
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.Connection = con;
-                    cmd.CommandText = "select StockId,SupplierId,ProductId,Count,Cost,Date from Stock_tb where StockId=@StockId";
-                    cmd.Parameters.Add(new SqlParameter("@StockId", id));
+                    cmd.CommandText = "select Purchase_Id,SupplierId,ProductId,Count,per_Product_Cost,Date from Purchase_tb where Purchase_Id=@PurchaseId";
+                    cmd.Parameters.Add(new SqlParameter("@PurchaseId", id));
 
                     cmd.CommandType = System.Data.CommandType.Text;
                     SqlDataReader reader = cmd.ExecuteReader();
@@ -91,11 +91,11 @@ namespace InventoryManagementSystem.Controllers
                     {
                         while (reader.Read())
                         {
-                            responseData.StockId = Convert.ToInt32(reader["StockId"]);
+                            responseData.PurchaseId = Convert.ToInt32(reader["Purchase_Id"]);
                             responseData.SupplierId = Convert.ToInt32(reader["SupplierId"]);
                             responseData.ProductId = Convert.ToInt32(reader["ProductId"]);
                             responseData.Count = Convert.ToInt32(reader["Count"]);
-                            responseData.TotalCost = (reader.GetDecimal(reader.GetOrdinal("Cost")));
+                            responseData.TotalCost = (reader.GetDecimal(reader.GetOrdinal("per_Product_Cost")));
                             responseData.Date = Convert.ToDateTime(reader["Date"].ToString());
 
 
@@ -233,7 +233,40 @@ namespace InventoryManagementSystem.Controllers
                 return View();
             }
         }
+        // GET: StockFillController/GetProductBySupplierID
+        public ActionResult GetProductBySupplierID(int supplierId)
+        {
+            var items = new List<ProductDetails>();
+            using (SqlConnection con = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
+            {
+                con.Open();
 
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    // SQL query to retrieve data
+                    cmd.Connection = con;
+                    cmd.CommandText = "select ProductId,Prod_Name from Product_tb where supplier_id=@SupplierId";
+                    cmd.Parameters.Add(new SqlParameter("@SupplierId", supplierId));
+                    cmd.CommandType = System.Data.CommandType.Text;
+                    // Execute the query and read the data
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        // Add items to the list
+                        items.Add(new ProductDetails
+                        {
+
+                            ProductId = Convert.ToInt32(reader["ProductId"]),
+                            Prod_Name = reader["Prod_Name"].ToString()
+                        });
+                    }
+
+                    reader.Close();
+                }
+            }
+            return Json(items);
+
+        }
 
 
 
@@ -259,7 +292,7 @@ namespace InventoryManagementSystem.Controllers
                     {
                         cmd.Connection = con;
                         cmd.CommandText = "sp_update_stock";
-                        cmd.Parameters.Add(new SqlParameter("@StockId", data.StockId));
+                        cmd.Parameters.Add(new SqlParameter("@PurchaseId", data.PurchaseId));
                         cmd.Parameters.Add(new SqlParameter("@SupplierId", data.SupplierId));
                         cmd.Parameters.Add(new SqlParameter("@ProductId", data.ProductId));
                         cmd.Parameters.Add(new SqlParameter("@Count", data.Count));
@@ -302,8 +335,8 @@ namespace InventoryManagementSystem.Controllers
                     using (SqlCommand cmd = new SqlCommand())
                     {
                         cmd.Connection = con;
-                        cmd.CommandText = "delete from Stock_tb where StockId= @StockId";
-                        cmd.Parameters.Add(new SqlParameter("@StockId", id));
+                        cmd.CommandText = "delete from purchase_tb where Purchase_Id= @PurchaseId";
+                        cmd.Parameters.Add(new SqlParameter("@PurchaseId", id));
                         cmd.CommandType = System.Data.CommandType.Text;
                         cmd.ExecuteNonQuery();
 

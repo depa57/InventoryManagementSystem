@@ -1,7 +1,7 @@
-﻿@model InventoryManagementSystem.Models.ProductDetails
+﻿@model InventoryManagementSystem.Models.ProductRelatedComponents
 
 @{
-    ViewData["Title"] = "Create";
+    //ViewData["Title"] = "Create";
 }
 
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" />
@@ -70,11 +70,17 @@
 
     <form asp-action="Create">
         <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
-
         <div class="form-group">
-            <label asp-for="Prod_Name" class="control-label"></label>
-            <input asp-for="Prod_Name" class="form-control" />
-            <span asp-validation-for="Prod_Name" class="text-danger"></span>
+            <label asp-for="details.SupplierId" class="control-label"></label>
+            <select asp-for="details.SupplierId" asp-items="Model.SupplierList" class="form-control js-example-basic-single">
+                <option disabled selected>--Select Supplier--</option>
+            </select>
+            <span asp-validation-for="details.SupplierId" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="details.Prod_Name" class="control-label"></label>
+            <input asp-for="details.Prod_Name" class="form-control" />
+            <span asp-validation-for="details.Prod_Name" class="text-danger"></span>
         </div>
 
         <div class="form-group">

@@ -1,7 +1,9 @@
 ﻿using InventoryManagementSystem.Models;
+using InventoryManagementSystem.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Data.SqlClient;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -27,7 +29,7 @@ namespace InventoryManagementSystem.Controllers
                     using (SqlCommand cmd = new SqlCommand())
                     {
                         cmd.Connection = con;
-                        cmd.CommandText = "select *from Product_tb";
+                        cmd.CommandText = "select ProductId,Prod_Name,Prod_Quantity,isnull(Cost_Price,0)Cost_Price from Product_tb";
                         cmd.CommandType = System.Data.CommandType.Text;
                         SqlDataReader reader = cmd.ExecuteReader();
                         if (reader.HasRows)
@@ -39,7 +41,7 @@ namespace InventoryManagementSystem.Controllers
                                     ProductId = Convert.ToInt32(reader["ProductId"]),
                                     Prod_Name = (reader["Prod_Name"].ToString()),
                                     Prod_Quantity = Convert.ToInt32(reader["Prod_Quantity"]),
-                                    Prod_Price = (reader.GetDecimal(reader.GetOrdinal("Prod_Price")))
+                                    PerProdCostPrice = Convert.ToDecimal(reader["Cost_Price"])
 
                                 });
 
@@ -80,7 +82,7 @@ namespace InventoryManagementSystem.Controllers
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.Connection = con;
-                    cmd.CommandText = "select ProductId,Prod_Name,Prod_Quantity,Prod_Price from Product_tb where ProductId=@ProductId";
+                    cmd.CommandText = "select ProductId,Prod_Name,Prod_Quantity,isnull(Cost_Price,0)Cost_Price from Product_tb where ProductId=@ProductId";
                     cmd.Parameters.Add(new SqlParameter("@ProductId", id));
                     cmd.CommandType = System.Data.CommandType.Text;
                     SqlDataReader reader = cmd.ExecuteReader();
@@ -89,9 +91,10 @@ namespace InventoryManagementSystem.Controllers
                         while (reader.Read())
                         {
                             responseData.ProductId = Convert.ToInt32(reader["ProductId"]);
-                            responseData.Prod_Name = (reader["Prod_Name"].ToString()); 
+                            responseData.Prod_Name = (reader["Prod_Name"].ToString());
                             responseData.Prod_Quantity = Convert.ToInt32(reader["Prod_Quantity"]);
-                            responseData.Prod_Price = (reader.GetDecimal(reader.GetOrdinal("Prod_Price")));
+                            responseData.PerProdCostPrice = (reader.GetDecimal(reader.GetOrdinal("Cost_Price")));
+                           
 
 
                         }
@@ -109,13 +112,56 @@ namespace InventoryManagementSystem.Controllers
         // GET: ProductController/Create
         public ActionResult Create()
         {
-            return View();
+            var item = new List<SupplierDetails>();
+
+            // Establish a connection to the database
+            using (SqlConnection con = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
+            {
+                con.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    // SQL query to retrieve data
+                    cmd.Connection = con;
+                    cmd.CommandText = "select SupplierID,SupplierName from supplier_tb";
+                    cmd.CommandType = System.Data.CommandType.Text;
+                    // Execute the query and read the data
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        // Add items to the list
+                        item.Add(new SupplierDetails
+                        {
+
+                            SupplierID = Convert.ToInt32(reader["SupplierID"]),
+                            SupplierName = reader["SupplierName"].ToString()
+                        });
+                    }
+
+                    reader.Close();
+                }
+            }
+            ProductRelatedComponents productRelatedcomponents = new ProductRelatedComponents()
+            {
+                details = new ProductDetails(),
+
+                SupplierList = item.Select
+                  (u =>
+                      new SelectListItem
+                      {
+                          Text = u.SupplierName,
+                          Value = u.SupplierID.ToString()
+                      }
+                  )
+
+            };
+            return View(productRelatedcomponents);
         }
 
         // POST: ProductController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(ProductDetails data)
+        public ActionResult Create(ProductRelatedComponents data)
         {
             try
             {
@@ -126,9 +172,8 @@ namespace InventoryManagementSystem.Controllers
                     {
                         cmd.Connection = con;
                         cmd.CommandText = "sp_Insert_product";
-                        cmd.Parameters.Add(new SqlParameter("@Prod_Name", data.Prod_Name));
-                        cmd.Parameters.Add(new SqlParameter("@Prod_Quantity", data.Prod_Quantity));
-                        cmd.Parameters.Add(new SqlParameter("@Prod_Price", data.Prod_Price));
+                        cmd.Parameters.Add(new SqlParameter("@Prod_Name", data.details.Prod_Name));
+                        cmd.Parameters.Add(new SqlParameter("@SupplierId", data.details.SupplierId));
                         cmd.CommandType = System.Data.CommandType.StoredProcedure;
                         cmd.ExecuteNonQuery();
 
@@ -170,7 +215,7 @@ namespace InventoryManagementSystem.Controllers
 
                         cmd.Parameters.Add(new SqlParameter("@ProductId", data.ProductId));
                         cmd.Parameters.Add(new SqlParameter("@Prod_Name", data.Prod_Name));
-                       // cmd.Parameters.Add(new SqlParameter("@Prod_Quantity", data.Prod_Quantity));
+                        // cmd.Parameters.Add(new SqlParameter("@Prod_Quantity", data.Prod_Quantity));
                         //cmd.Parameters.Add(new SqlParameter("@Prod_Price", data.Prod_Price));
                         cmd.CommandType = System.Data.CommandType.StoredProcedure;
                         cmd.ExecuteNonQuery();
@@ -226,5 +271,53 @@ namespace InventoryManagementSystem.Controllers
                 return View();
             }
         }
+
+        public ActionResult ProductSellingPriceAdd() 
+        {
+            var items = new List<ProductDetails>();
+
+            // Establish a connection to the database
+            using (SqlConnection con = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
+            {
+                con.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    // SQL query to retrieve data
+                    cmd.Connection = con;
+                    cmd.CommandText = "select ProductId,Prod_Name from Product_tb";
+                    cmd.CommandType = System.Data.CommandType.Text;
+                    // Execute the query and read the data
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        // Add items to the list
+                        items.Add(new ProductDetails
+                        {
+
+                            ProductId = Convert.ToInt32(reader["ProductId"]),
+                            Prod_Name = reader["Prod_Name"].ToString()
+                        });
+                    }
+
+                    reader.Close();
+                }
+            }
+            ProductRelatedComponents productRelatedcomponents = new ProductRelatedComponents()
+            {
+                details = new ProductDetails(),
+                ProductList = items.Select
+            (u =>
+                new SelectListItem
+                {
+                    Text = u.Prod_Name,
+                    Value = u.ProductId.ToString()
+                }
+            )
+
+            };
+            return View(productRelatedcomponents); 
+        }
+
     }
 }
