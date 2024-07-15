@@ -67,8 +67,8 @@ namespace InventoryManagementSystem.Controllers
 
         // POST: ReportController/PurchaseReport
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult PurchaseReport(PurchaseRepoDropDown purchaseRepoDropDown)
+       // [ValidateAntiForgeryToken]
+        public ActionResult PurchaseReport([FromBody] PurchaseReportModel purchaseRepoDropDown)
         {
             try
             {
@@ -80,10 +80,10 @@ namespace InventoryManagementSystem.Controllers
                     {
                         cmd.Connection = con;
                         cmd.CommandText = "sp_SupplierPurchaseReport";
-                        cmd.Parameters.Add(new SqlParameter("@PurchaseId", purchaseRepoDropDown.details.PurchaseId));
-                        cmd.Parameters.Add(new SqlParameter("@From", purchaseRepoDropDown.details.From));
-                        cmd.Parameters.Add(new SqlParameter("@To", purchaseRepoDropDown.details.To));
-                        cmd.Parameters.Add(new SqlParameter("@SupplierId", purchaseRepoDropDown.details.SupplierId));
+                        cmd.Parameters.Add(new SqlParameter("@PurchaseId", purchaseRepoDropDown.PurchaseId));
+                        cmd.Parameters.Add(new SqlParameter("@From", purchaseRepoDropDown.From));
+                        cmd.Parameters.Add(new SqlParameter("@To", purchaseRepoDropDown.To));
+                        cmd.Parameters.Add(new SqlParameter("@SupplierId", purchaseRepoDropDown.SupplierId));
 
                         cmd.CommandType = System.Data.CommandType.StoredProcedure;
                         
@@ -93,10 +93,10 @@ namespace InventoryManagementSystem.Controllers
                             while (reader.Read())
                             {
                                 responseData.Add(new StockModel() {
-                                    SupplierId = Convert.ToInt32(reader["SupplierId"]),
-                                    ProductId = Convert.ToInt32(reader["ProductId"]),
+                                    SupplierName = reader["SupplierName"].ToString(),
+                                    ProductName = reader["Prod_Name"].ToString(),
                                     Count = Convert.ToInt32(reader["Count"]),
-                                    TotalCost = (reader.GetDecimal(reader.GetOrdinal("Cost"))),
+                                    TotalCost = (reader.GetDecimal(reader.GetOrdinal("per_Product_Cost"))),
                                     Date = Convert.ToDateTime(reader["Date"].ToString())
                                 });
                               
@@ -111,7 +111,7 @@ namespace InventoryManagementSystem.Controllers
                     con.Close();
                 }
 
-                return RedirectToAction(nameof(PurchaseReportList), new { data = JsonConvert.SerializeObject(responseData) });
+                return Json(responseData);
             }
             catch
             {
@@ -120,11 +120,66 @@ namespace InventoryManagementSystem.Controllers
         }
 
 
-        public ActionResult PurchaseReportList(string data)
+        // GET: ReportController/SalesReport
+        public ActionResult SalesReport()
         {
-            var purchaseList = JsonConvert.DeserializeObject(data);
-            return View(purchaseList);
+                     
+            return View();
         }
 
+        // POST: ReportController/SalesReport
+        [HttpPost]
+        // [ValidateAntiForgeryToken]
+        public ActionResult SalesReport([FromBody] PurchaseReportModel sales)
+        {
+            try
+            {
+                var responseData = new List<SalesReportDetail>();
+                using (SqlConnection con = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
+                {
+                    con.Open();
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        cmd.Connection = con;
+                        cmd.CommandText = "sp_SalesReport";
+                        cmd.Parameters.Add(new SqlParameter("@From", sales.From));
+                        cmd.Parameters.Add(new SqlParameter("@To", sales.To));
+
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                        SqlDataReader reader = cmd.ExecuteReader();
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read())
+                            {
+                                responseData.Add(new SalesReportDetail()
+                                {
+                                    
+                                    SalesDate = reader["SalesDate"].ToString(),
+                                    CustomerName= reader["CustomerName"].ToString(),
+                                    ProductName = reader["Productname"].ToString(),
+                                    Quantity = Convert.ToInt32(reader["Quantity"]),
+                                    PerPrice = reader.GetDecimal(reader.GetOrdinal("Per_price")),
+                                    TotalPrice = (reader.GetDecimal(reader.GetOrdinal("TotalPrice"))),
+                                });
+
+
+
+                            }
+
+                        }
+
+
+                    }
+                    con.Close();
+                }
+
+                return Json(responseData);
+            }
+            catch
+            {
+                return View();
+            }
+        }
     }
 }

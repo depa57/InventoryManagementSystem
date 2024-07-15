@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Minor Project\\InventoryManagementSystem\\InventoryManagementSystem\\InventoryManagementSystem.csproj": {}
+    "C:\\intern\\ims\\InventoryManagementSystem\\InventoryManagementSystem\\InventoryManagementSystem.csproj": {}
   },
   "projects": {
-    "D:\\Minor Project\\InventoryManagementSystem\\InventoryManagementSystem\\InventoryManagementSystem.csproj": {
+    "C:\\intern\\ims\\InventoryManagementSystem\\InventoryManagementSystem\\InventoryManagementSystem.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Minor Project\\InventoryManagementSystem\\InventoryManagementSystem\\InventoryManagementSystem.csproj",
+        "projectUniqueName": "C:\\intern\\ims\\InventoryManagementSystem\\InventoryManagementSystem\\InventoryManagementSystem.csproj",
         "projectName": "InventoryManagementSystem",
-        "projectPath": "D:\\Minor Project\\InventoryManagementSystem\\InventoryManagementSystem\\InventoryManagementSystem.csproj",
-        "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-        "outputPath": "D:\\Minor Project\\InventoryManagementSystem\\InventoryManagementSystem\\obj\\",
+        "projectPath": "C:\\intern\\ims\\InventoryManagementSystem\\InventoryManagementSystem\\InventoryManagementSystem.csproj",
+        "packagesPath": "C:\\Users\\deepa.gurung\\.nuget\\packages\\",
+        "outputPath": "C:\\intern\\ims\\InventoryManagementSystem\\InventoryManagementSystem\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\deepa.gurung\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -72,7 +72,7 @@
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
-              "version": "[8.0.2, )"
+              "version": "[8.0.3, )"
             }
           },
           "imports": [
