@@ -17,42 +17,20 @@ namespace InventoryManagementSystem.Controllers
         {
             _configuration = configuration;
         }
+
+        public ActionResult ProductCountFororDashboard() 
+        {
+            List<ProductDetails> responseData = GetProductList();
+            return Json(responseData); 
+        }
+
+
         // GET: ProductController
         public ActionResult ProductList()
         {
             try
             {
-                var responseData = new List<ProductDetails>();
-                using (SqlConnection con = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
-                {
-                    con.Open();
-                    using (SqlCommand cmd = new SqlCommand())
-                    {
-                        cmd.Connection = con;
-                        cmd.CommandText = "select ProductId,Prod_Name,Prod_Quantity,isnull(Cost_Price,0)Cost_Price from Product_tb";
-                        cmd.CommandType = System.Data.CommandType.Text;
-                        SqlDataReader reader = cmd.ExecuteReader();
-                        if (reader.HasRows)
-                        {
-                            while (reader.Read())
-                            {
-                                responseData.Add(new ProductDetails()
-                                {
-                                    ProductId = Convert.ToInt32(reader["ProductId"]),
-                                    Prod_Name = (reader["Prod_Name"].ToString()),
-                                    Prod_Quantity = Convert.ToInt32(reader["Prod_Quantity"]),
-                                    PerProdCostPrice = Convert.ToDecimal(reader["Cost_Price"])
-
-                                });
-
-                            }
-
-                        }
-
-                    }
-                    con.Close();
-
-                }
+                List<ProductDetails> responseData = GetProductList();
 
                 return View(responseData);
 
@@ -63,6 +41,43 @@ namespace InventoryManagementSystem.Controllers
                 throw ex;
             }
 
+        }
+
+        private List<ProductDetails> GetProductList()
+        {
+            var responseData = new List<ProductDetails>();
+            using (SqlConnection con = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
+            {
+                con.Open();
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = con;
+                    cmd.CommandText = "select ProductId,Prod_Name,Prod_Quantity,isnull(Cost_Price,0)Cost_Price from Product_tb";
+                    cmd.CommandType = System.Data.CommandType.Text;
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            responseData.Add(new ProductDetails()
+                            {
+                                ProductId = Convert.ToInt32(reader["ProductId"]),
+                                Prod_Name = (reader["Prod_Name"].ToString()),
+                                Prod_Quantity = Convert.ToInt32(reader["Prod_Quantity"]),
+                                PerProdCostPrice = Convert.ToDecimal(reader["Cost_Price"])
+
+                            });
+
+                        }
+
+                    }
+
+                }
+                con.Close();
+
+            }
+
+            return responseData;
         }
 
         // GET: ProductController/Details/5

@@ -6,14 +6,18 @@ namespace InventoryManagementSystem.Models
     public class StockModel
     {
         public int PurchaseId { get; set; }
-        public string SupplierName { get; set; }
         [DisplayName("Supplier")]
+        public string SupplierName { get; set; }
+      
         public int SupplierId{ get; set; }
-        public string ProductName { get; set; }
         [DisplayName("Product")]
+        public string ProductName { get; set; }
+       
 
         public int ProductId { get; set; }
+        [DisplayName("Quantity")]
         public int Count{ get; set; }
+        [DisplayName("Total Cost")]
         public decimal TotalCost { get; set; }
         public DateTime Date { get; set; } = DateTime.Now;
     }

@@ -4,7 +4,7 @@
     ViewData["Title"] = "ProductsSoldAdd";
 }
 
-<h1>ProductsSoldAdd</h1>
+<h1>Sold Products</h1>
 @*
 <h4>SalesDetails</h4>
 <hr />
@@ -65,7 +65,8 @@
             <form id="customerForm">
                 <div class="form-group">
                     <label for="date">Date:</label>
-                    <input type="date" id="date" name="date">
+                    <input type="date" id="date" name="date" min="1900-01-01" max="2024-07-27/>
+                    
                 </div>
                 <div class="form-group">
                     <label for="customerName">Customer Name:</label>
@@ -245,7 +246,7 @@
                     console.log(products);
                     products.forEach(function (product) {
                         debugger;
-                        html1 += `<li><a role="menuitem" tabindex="-1" href="javascript:void(0)" onclick="selectCustomer('${product.prod_Name}')">${product.prod_Name}</a></li>`;
+                        html1 += `<li><a role="menuitem" tabindex="-1" href="javascript:void(0)" onclick="selectProduct('${product.prod_Name}')">${product.prod_Name}</a></li>`;
                     });
                 } else {
                     html1 += `<li><a tabindex="-1" href="#">No matching customers found</a></li>`;

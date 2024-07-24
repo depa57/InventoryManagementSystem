@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace InventoryManagementSystem.Context
 {
@@ -7,7 +8,7 @@ namespace InventoryManagementSystem.Context
     {
         private readonly DbContextOptions _options;
 
-        public SimpleWebAppDBContext(DbContextOptions options) : base(options)
+        public SimpleWebAppDBContext(DbContextOptions<SimpleWebAppDBContext> options) : base(options)
         {
             _options = options;
         }

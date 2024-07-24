@@ -65,12 +65,12 @@ body {
     border-radius: 4px;
 }
 
-.form-group button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
+    .form-group button {
+        background-color: #28a745;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
 
 .form-group button:hover {
     background-color: #0056b3;
@@ -98,12 +98,13 @@ th, td {
 
 th {
     background-color: #f8f9fa;
+    color: #007bff;
 }
 
 .back-button {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: #28a745;
     color: white;
     border: none;
     border-radius: 4px;

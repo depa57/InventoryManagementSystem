@@ -2,6 +2,10 @@ using InventoryManagementSystem.Context;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using InventoryManagementSystem.Context;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using InventoryManagementSystem.Utilities;
+using InventoryManagementSystem.ViewModels;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +15,10 @@ builder.Services.AddControllersWithViews();// reperesents involment of both cont
 string connectionString = builder.Configuration.GetConnectionString("DefaultConnection")!;
 builder.Services.AddDbContext<SimpleWebAppDBContext>(c => c.UseSqlServer(connectionString));
 
-builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<SimpleWebAppDBContext>();
+builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddDefaultTokenProviders().AddEntityFrameworkStores<SimpleWebAppDBContext>();
+
+builder.Services.AddSingleton<IEmailSender, EmailSender>();
+builder.Services.Configure<MailDetailsViewModel>(builder.Configuration.GetSection("mailDetails"));
 
 var app = builder.Build();
 

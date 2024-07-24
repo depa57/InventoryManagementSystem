@@ -58,6 +58,16 @@ function FetchPurchaseList() {
         }
     });
 }
+function ResetForm() {
+    //debugger;
+    //$("#listSalesBody").empty();
+    //$("#listBody").empty();
+    //supplierForm.reset();
+    //supplier.reset();
+
+    window.location.reload(true);
+    
+}
 function FetchSalesList() {
     debugger;
   

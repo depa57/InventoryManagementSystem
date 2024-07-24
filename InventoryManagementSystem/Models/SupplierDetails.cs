@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace InventoryManagementSystem.Models
 {
@@ -8,7 +9,8 @@ namespace InventoryManagementSystem.Models
 
         [StringLength(100, ErrorMessage = "The field must be a string with a maximum length of 20.")]
         [Required(ErrorMessage = "SupplierName field is required.")]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Supplier name can only contain letters.")]
+        //[RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Supplier name can only contain letters.")]
+        [DisplayName("Supplier")]
         public string SupplierName { get; set; }
 
         [StringLength(20, ErrorMessage = "The field must be a string with a maximum length of 20.")]

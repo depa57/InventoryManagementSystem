@@ -68,7 +68,7 @@ namespace InventoryManagementSystem.Controllers
         // POST: ReportController/PurchaseReport
         [HttpPost]
        // [ValidateAntiForgeryToken]
-        public ActionResult PurchaseReport([FromBody] PurchaseReportModel purchaseRepoDropDown)
+        public ActionResult PurchaseReport([FromBody] PurchaseReportModel purchaseRepo)
         {
             try
             {
@@ -80,10 +80,10 @@ namespace InventoryManagementSystem.Controllers
                     {
                         cmd.Connection = con;
                         cmd.CommandText = "sp_SupplierPurchaseReport";
-                        cmd.Parameters.Add(new SqlParameter("@PurchaseId", purchaseRepoDropDown.PurchaseId));
-                        cmd.Parameters.Add(new SqlParameter("@From", purchaseRepoDropDown.From));
-                        cmd.Parameters.Add(new SqlParameter("@To", purchaseRepoDropDown.To));
-                        cmd.Parameters.Add(new SqlParameter("@SupplierId", purchaseRepoDropDown.SupplierId));
+                        cmd.Parameters.Add(new SqlParameter("@PurchaseId", purchaseRepo.PurchaseId));
+                        cmd.Parameters.Add(new SqlParameter("@From", purchaseRepo.From));
+                        cmd.Parameters.Add(new SqlParameter("@To", purchaseRepo.To));
+                        cmd.Parameters.Add(new SqlParameter("@SupplierId", purchaseRepo.SupplierId));
 
                         cmd.CommandType = System.Data.CommandType.StoredProcedure;
                         
@@ -181,5 +181,65 @@ namespace InventoryManagementSystem.Controllers
                 return View();
             }
         }
+
+        //GET: ReportController/ProfitLossReport
+        public ActionResult ProfitLossReport()
+        {
+            return View();
+
+        }
+        // POST: ReportController/ProfitLossReport
+        [HttpPost]
+        // [ValidateAntiForgeryToken]
+        public ActionResult ProfitLossreport([FromBody] PurchaseReportModel profitloss)
+        {
+            try
+            {
+                var responseData = new List<StockModel>();
+                using (SqlConnection con = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
+                {
+                    con.Open();
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        cmd.Connection = con;
+                        cmd.CommandText = "sp_SalesReport";
+                        cmd.Parameters.Add(new SqlParameter("@From", profitloss.From));
+                        cmd.Parameters.Add(new SqlParameter("@To", profitloss.To));
+
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                        SqlDataReader reader = cmd.ExecuteReader();
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read())
+                            {
+                                responseData.Add(new StockModel()
+                                {
+                                    ProductName = reader["Prod_Name"].ToString(),
+                                    Count = Convert.ToInt32(reader["Count"]),
+                                    TotalCost = (reader.GetDecimal(reader.GetOrdinal("per_Product_Cost"))),
+                                    Date = Convert.ToDateTime(reader["Date"].ToString())
+                                });
+
+
+
+                            }
+
+                        }
+
+
+                    }
+                    con.Close();
+                }
+
+                return Json(responseData);
+            }
+            catch
+            {
+                return View();
+            }
+
+        }
+
     }
 }

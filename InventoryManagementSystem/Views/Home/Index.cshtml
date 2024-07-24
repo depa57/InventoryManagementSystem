@@ -3,8 +3,8 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    
+    <h1 class="display-4">Welcome to IMS</h1>
+
 </div>
 
 <div>
@@ -31,8 +31,8 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Supplier</h5>
-                        <p class="card-text">Count: <span id="supplierCount">10</span></p>
-                        <a href="/Supplier/SupplierList" class="btn btn-primary">View Suppliers</a>
+@*                         <p class="card-text">Count: <span id="supplierCount">10</span></p>
+ *@                        <a href="/Supplier/SupplierList" class="btn btn-primary">View Suppliers</a>
                     </div>
                 </div>
             </div>
@@ -41,8 +41,8 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Product</h5>
-                        <p class="card-text">Count: <span id="productCount">20</span></p>
-                        <a href="/Product/ProductList" class="btn btn-primary">View Products</a>
+                       @*  <p class="card-text">Count: <span id="productCount">20</span></p> *@
+                        <a href="/StockFill/StockList" class="btn btn-primary">View Products</a>
                     </div>
                 </div>
             </div>
@@ -51,8 +51,8 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Stock</h5>
-                        <p class="card-text">Count: <span id="stockCount">10</span></p>
-                        <a href="/StockFill/StockList" class="btn btn-primary">View Stock</a>
+@*                         <p class="card-text">Count: <span id="stockCount">10</span></p>
+ *@                        <a href="/Product/ProductList" class="btn btn-primary">View Stock</a>
                     </div>
                 </div>
             </div>
@@ -61,15 +61,15 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Customer</h5>
-                        <p class="card-text">Count: <span id="customerCount">30</span></p>
-                        <a href="/Customer/CustomerList" class="btn btn-primary">View Customers</a>
+@*                         <p class="card-text">Count: <span id="customerCount">30</span></p>
+ *@                        <a href="/Customer/CustomerList" class="btn btn-primary">View Customers</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="row"> 
+    <div class="row">
 
         <div class="col-md-6">
             <div class="chart-container">
@@ -97,40 +97,56 @@
             </div>
         </div>
 
-        
-        
+
+
     </div>
-    
 
 
 
-    
-    
+
+
+
 
     <!-- Custom JavaScript -->
     <script>
         $(document).ready(function () {
             // Bar Chart: Product Categories
             var categoryCtx = $('#categoryChart');
-            var categoryChart = new Chart(categoryCtx, {
-                type: 'bar',
-                data: {
-                    labels: ['Electronics', 'Furniture', 'Clothing', 'Food', 'Books'],
-                    datasets: [{
-                        label: 'Number of Products',
-                        data: [50, 30, 70, 20, 40],
-                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
+            $.ajax({
+                type: "GET",
+                url: "/Product/ProductCountFororDashboard"
+
+            }).done(function (data) {
+                debugger;
+                // Extract labels and data from the response
+                var labels = [];
+                var counts = [];
+                data.forEach(function (item) {
+                    labels.push(item.prod_Name);
+                    counts.push(item.prod_Quantity);
+                });
+                var categoryChart = new Chart(categoryCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Number of Products',
+                            data: counts,
+                            // backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            // borderColor: 'rgba(75, 192, 192, 1)',
+                            backgroundColor: 'powderblue',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
                         }
                     }
-                }
+                });
             });
 
             // Line Chart: Inventory Levels Over Time
@@ -162,17 +178,24 @@
             var stockDistributionChart = new Chart(stockDistributionCtx, {
                 type: 'pie',
                 data: {
-                    labels: ['Electronics', 'Furniture', 'Clothing', 'Food', 'Books'],
+                    labels: ['Samsung', 'Apple', 'Huawei', 'Vivo', 'MI'],
                     datasets: [{
                         label: 'Stock Distribution',
                         data: [300, 150, 200, 100, 250],
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 206, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)',
-                            'rgba(153, 102, 255, 0.2)'
-                        ],
+                         backgroundColor: [
+                            '#E6E6DC',
+                            'rgba( 255, 253, 208)',
+                            'rgba(255, 207, 117)',
+                            '#97bfec',
+                            '#b9f5d0'
+                         ],
+                        // backgroundColor: [
+                        //     '#88ace0',
+                        //     'rgba( 255, 253, 208)',
+                        //     'rgba(255, 206, 86, 0.2)'
+                        //     'rgba( 51, 102, 153)'
+                        //     '#669966',
+                        // ],
                         borderColor: [
                             'rgba(255, 99, 132, 1)',
                             'rgba(54, 162, 235, 1)',
@@ -193,7 +216,7 @@
             var reorderPointChart = new Chart(reorderPointCtx, {
                 type: 'doughnut',
                 data: {
-                    labels: ['Electronics', 'Furniture', 'Clothing', 'Food', 'Books'],
+                    labels: ['Samsung', 'Apple', 'Huawei', 'Vivo', 'MI'],
                     datasets: [{
                         label: 'Reorder Points',
                         data: [50, 25, 40, 30, 20],

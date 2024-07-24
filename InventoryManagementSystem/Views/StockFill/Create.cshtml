@@ -1,7 +1,7 @@
 ﻿@model InventoryManagementSystem.Models.ViewModels.StockRelatedComponents
 
 @{
-    ViewData["Title"] = "Create";
+//     ViewData["Title"] = "Create";
 }
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <style>
@@ -92,7 +92,7 @@
         
         <div class="form-group">
             <label asp-for="details.Date" class="control-label"></label>
-            <input asp-for="details.Date" class="form-control" type="date" min="1900-01-01" max="2024-12-31"/>
+            <input asp-for="details.Date" class="form-control" type="date" min="1900-01-01" max="2024-07-27"/>
             <span asp-validation-for="details.Date" class="text-danger"></span>
         </div>
         
@@ -139,6 +139,7 @@
         });
       
     </script>
+ 
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
