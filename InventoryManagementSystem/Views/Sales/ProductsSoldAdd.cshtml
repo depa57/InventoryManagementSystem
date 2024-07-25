@@ -238,6 +238,22 @@
                     }
                 });
             });
+            $(document).ready(function () {
+
+
+                $('#quantity').on('input', function () {
+                    var quantityInput = document.getElementById('quantity');
+                    // Get the value of the max attribute
+                    var maxValue = Number(quantityInput.getAttribute('max'));
+                    debugger;
+                    quantityInput.addEventListener('input', function () {
+                        if (Number(quantityInput.value) > maxValue) {
+                            quantityInput.value = maxValue;
+                        }
+                    });
+                });
+               
+            });
 
             function displayProducts(products) {
                 debugger;
@@ -246,7 +262,7 @@
                     console.log(products);
                     products.forEach(function (product) {
                         debugger;
-                        html1 += `<li><a role="menuitem" tabindex="-1" href="javascript:void(0)" onclick="selectProduct('${product.prod_Name}')">${product.prod_Name}</a></li>`;
+                        html1 += `<li><a role="menuitem" tabindex="-1" href="javascript:void(0)" onclick="selectProduct('${product.prod_Name}', '${product.prod_Quantity}')">${product.prod_Name}</a></li>`;
                     });
                 } else {
                     html1 += `<li><a tabindex="-1" href="#">No matching customers found</a></li>`;
@@ -254,10 +270,21 @@
                 $(".product_search_list").html(html1).show();
             }
 
-            function selectProduct(name) {
+            function selectProduct(name,quantity) {
+                debugger;
                 $('#product').val(name);
                 $('.product_search_list').hide();
-                // You can add additional code here to fetch and display more details about the selected customer if needed
+               var quantityInput = document.getElementById('quantity');
+
+                //Add the min attribute with a value of 4
+                quantityInput.setAttribute('max', quantity);
+                //You can add additional code here to fetch and display more details about the selected customer if needed
+                // Add event listener to enforce validation
+                // quantityInput.addEventListener('input', function () {
+                //     if (quantityInput.value > quantity) {
+                //         quantityInput.value = quantity;
+                //     }
+                // });
             }
 
         </script>

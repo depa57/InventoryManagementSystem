@@ -1,4 +1,4 @@
-﻿@model IEnumerable<InventoryManagementSystem.Models.SalesDetails>
+﻿@model InventoryManagementSystem.Models.ViewModels.StockRelatedComponents
 
 @{
     ViewData["Title"] = "ProfitLossreport";
@@ -20,17 +20,24 @@
                 <div class="form-group row">
                     <div class="form-field">
                         <label for="from">From</label>
-                        <input type="date" id="fromDate" name="from">
+                        <input type="date" id="PLfromDate" name="from">
                     </div>
                     <div class="form-field">
                         <label for="to">To</label>
-                        <input type="date" id="toDate" name="to">
+                        <input type="date" id="PLtoDate" name="to">
                     </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="details.ProductId" class="control-label"></label>
+                    <select asp-for="details.ProductId" id="PLproducts" asp-items="Model.ProductList" class="form-control js-example-basic-single">
+                        <option disabled value="0" selected>--Select Product--</option>
+                    </select>
+                    <span asp-validation-for="details.ProductId" class="text-danger"></span>
                 </div>
 
 
                 <div class="form-group">
-                    <button onclick="FetchSalesList()" type="button">Submit</button>
+                    <button onclick="FetchPLList()" type="button">Submit</button>
                 </div>
             </form>
         </div>
@@ -45,18 +52,23 @@
                     <tr>
                         <th>Date</th>
                        <th>Product</th>
-                        <th>Quantity</th>
-                        <th>Per Price</th>
-                        <th>VAT</th>
-                        <th>Discount</th>
+                        <th>Quantity</th>                      
                         <th>Total Price</th>
                     </tr>
                 </thead>
-                <tbody id="listSalesBody">
+                <tbody id="listPLBody">
                     <!-- Rows will be dynamically added here -->
                 </tbody>
+                <tfoot>
+                                    
+                    <tr>
+                        <td colspan="3" class="text-right">Grand Total (Rs.):</td>
+                        <td id="grandPLTotal"></td>
+                    </tr>
+                </tfoot>
             </table>
         </div>
+       
     </div>
     @section Scripts {
         <script src="~/js/purchaseReport.js"></script>

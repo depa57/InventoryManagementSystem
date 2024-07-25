@@ -145,7 +145,7 @@ namespace InventoryManagementSystem.Controllers
                 {
                     // SQL query to retrieve data
                     cmd.Connection = con;
-                    cmd.CommandText = "select ProductId,Prod_Name from Product_tb where Prod_Name like @productname+'%'";
+                    cmd.CommandText = "select ProductId,Prod_Name,Prod_Quantity from Product_tb where Prod_Name like @productname+'%'";
                     cmd.Parameters.Add(new SqlParameter("@productname", productname));
                     cmd.CommandType = System.Data.CommandType.Text;
                     // Execute the query and read the data
@@ -157,8 +157,9 @@ namespace InventoryManagementSystem.Controllers
                         {
 
                             ProductId = Convert.ToInt32(reader["ProductId"]),
-                            Prod_Name = reader["Prod_Name"].ToString()
-                           
+                            Prod_Name = reader["Prod_Name"].ToString(),
+                            Prod_Quantity= Convert.ToInt32(reader["Prod_Quantity"])
+
                         });
                     }
 

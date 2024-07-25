@@ -185,8 +185,48 @@ namespace InventoryManagementSystem.Controllers
         //GET: ReportController/ProfitLossReport
         public ActionResult ProfitLossReport()
         {
-            return View();
+            var items = new List<ProductDetails>();
 
+            // Establish a connection to the database
+            using (SqlConnection con = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
+            {
+                con.Open();
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    // SQL query to retrieve data
+                    cmd.Connection = con;
+                    cmd.CommandText = "select ProductId,Prod_Name from Product_tb";
+                    cmd.CommandType = System.Data.CommandType.Text;
+                    // Execute the query and read the data
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        // Add items to the list
+                        items.Add(new ProductDetails
+                        {
+
+                            ProductId = Convert.ToInt32(reader["ProductId"]),
+                            Prod_Name = reader["Prod_Name"].ToString()
+                        });
+                    }
+
+                    reader.Close();
+                }
+            }
+            StockRelatedComponents stockRelatedcomponents = new StockRelatedComponents()
+            {
+                details = new StockModel(),
+                ProductList = items.Select
+           (u =>
+               new SelectListItem
+               {
+                   Text = u.Prod_Name,
+                   Value = u.ProductId.ToString()
+               }
+           ),
+            };
+            return View(stockRelatedcomponents);
         }
         // POST: ReportController/ProfitLossReport
         [HttpPost]
@@ -202,9 +242,10 @@ namespace InventoryManagementSystem.Controllers
                     using (SqlCommand cmd = new SqlCommand())
                     {
                         cmd.Connection = con;
-                        cmd.CommandText = "sp_SalesReport";
-                        cmd.Parameters.Add(new SqlParameter("@From", profitloss.From));
-                        cmd.Parameters.Add(new SqlParameter("@To", profitloss.To));
+                        cmd.CommandText = "SP_PROFITLOSSREPORT";
+                        cmd.Parameters.Add(new SqlParameter("@FROMDATE", profitloss.From));
+                        cmd.Parameters.Add(new SqlParameter("@TODATE", profitloss.To));
+                        cmd.Parameters.Add(new SqlParameter("@PRODUCTID", profitloss.SupplierId));
 
                         cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
@@ -215,10 +256,10 @@ namespace InventoryManagementSystem.Controllers
                             {
                                 responseData.Add(new StockModel()
                                 {
-                                    ProductName = reader["Prod_Name"].ToString(),
-                                    Count = Convert.ToInt32(reader["Count"]),
-                                    TotalCost = (reader.GetDecimal(reader.GetOrdinal("per_Product_Cost"))),
-                                    Date = Convert.ToDateTime(reader["Date"].ToString())
+                                    ProductName = reader["PRODUCTNAME"].ToString(),
+                                    Count = Convert.ToInt32(reader["QUANTITY"]),
+                                    TotalCost = (reader.GetDecimal(reader.GetOrdinal("TOTALPRICE"))),
+                                    Date = Convert.ToDateTime(reader["TRANSACTIONDATE"].ToString())
                                 });
 
 
